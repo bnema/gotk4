@@ -2533,7 +2533,7 @@ const KEY_zerosuperior = 16785520
 const KEY_zstroke = 16777654
 const MAJOR_VERSION = 3
 const MAX_TIMECOORD_AXES = 128
-const MICRO_VERSION = 42
+const MICRO_VERSION = 49
 const MINOR_VERSION = 24
 
 // PARENT_RELATIVE: special value, indicating that the background for a window
@@ -8711,7 +8711,14 @@ func NewCursorForDisplay(display *Display, cursorType CursorType) *Cursor {
 //
 // - ! (zoom_in_cursor.png) "zoom-in"
 //
-// - ! (zoom_out_cursor.png) "zoom-out".
+// - ! (zoom_out_cursor.png) "zoom-out"
+//
+// Additionally, the following cursor names are supported, which are not in the
+// CSS specification:
+//
+// - ! (dnd_ask_cursor.png) "dnd-ask"
+//
+// - ! (all_resize_cursor.png) "all-resize".
 //
 // The function takes the following parameters:
 //

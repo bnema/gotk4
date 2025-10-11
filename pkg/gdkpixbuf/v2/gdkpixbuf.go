@@ -413,7 +413,7 @@ type PixbufModuleUpdatedFunc func(pixbuf *Pixbuf, x, y, width, height int)
 // If successful it should return TRUE; if an error occurs it should set error
 // and return FALSE, in which case gdk_pixbuf_save_to_callback() will fail with
 // the same error.
-type PixbufSaveFunc func(buf []byte) (err error, ok bool)
+type PixbufSaveFunc func(buf string) (err error, ok bool)
 
 // Pixbuf: pixel buffer.
 //

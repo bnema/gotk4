@@ -98,22 +98,27 @@ func (conv *Converter) cgoArrayConverter(value *ValueConverted) bool {
 	switch types.CleanCType(array.CType, false) {
 	case "char*", "gchar*":
 		// Hack to only allow certain special types.
-		if !strings.Contains(array.CType, "const") || value.Doc == nil {
+		if !strings.Contains(array.CType, "const") {
 			break // fallback to []byte if not const
 		}
 		if array.Length == nil && !array.IsZeroTerminated() {
 			break // unknown case, handle elsewhere
 		}
 
-		var match bool
-		for _, m := range utf8Matches {
-			if strings.Contains(value.Doc.String, m) {
-				match = true
-				break
+		// Check if documentation explicitly indicates this is binary data (not text).
+		// If no documentation or documentation doesn't mention binary/byte keywords,
+		// assume const gchar* is text (which is what gchar is designed for).
+		isBinary := false
+		if value.Doc != nil {
+			docStr := strings.ToLower(value.Doc.String)
+			if strings.Contains(docStr, "binary") ||
+			   strings.Contains(docStr, "byte array") ||
+			   strings.Contains(docStr, "raw data") {
+				isBinary = true
 			}
 		}
-		if !match {
-			break // probably a []byte
+		if isBinary {
+			break // explicitly marked as binary, use []byte
 		}
 
 		if value.ShouldFree() {

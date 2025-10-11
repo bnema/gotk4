@@ -91,10 +91,9 @@ func _gotk4_gdkpixbuf2_PixbufSaveFunc(arg1 *C.gchar, arg2 C.gsize, arg3 **C.GErr
 		fn = v.(PixbufSaveFunc)
 	}
 
-	var _buf []byte // out
+	var _buf string
 
-	_buf = make([]byte, arg2)
-	copy(_buf, unsafe.Slice((*byte)(unsafe.Pointer(arg1)), arg2))
+	_buf = C.GoStringN(arg1, C.int(arg2))
 
 	err, ok := fn(_buf)
 

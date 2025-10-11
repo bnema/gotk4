@@ -224,6 +224,9 @@ func (display *WaylandDisplay) QueryRegistry(global string) bool {
 
 // SetCursorTheme sets the cursor theme for the given display.
 //
+// Deprecated: Use the cursor-related properties of GtkSettings
+// (../gtk4/class.Settings.html) to set the cursor theme.
+//
 // The function takes the following parameters:
 //
 //   - name: new cursor theme.
@@ -407,6 +410,16 @@ func wrapWaylandSurface(obj *coreglib.Object) *WaylandSurface {
 
 func marshalWaylandSurface(p uintptr) (interface{}, error) {
 	return wrapWaylandSurface(coreglib.ValueFromNative(unsafe.Pointer(p)).Object()), nil
+}
+
+// ForceNextCommit forces next commit.
+func (surface *WaylandSurface) ForceNextCommit() {
+	var _arg0 *C.GdkSurface // out
+
+	_arg0 = (*C.GdkSurface)(unsafe.Pointer(coreglib.InternObject(surface).Native()))
+
+	C.gdk_wayland_surface_force_next_commit(_arg0)
+	runtime.KeepAlive(surface)
 }
 
 // WaylandToplevel: wayland implementation of GdkToplevel.
