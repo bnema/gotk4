@@ -1,4 +1,4 @@
-module github.com/bnema/gotk4
+module github.com/diamondburned/gotk4
 
 go 1.25.3
 

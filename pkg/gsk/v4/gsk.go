@@ -1430,7 +1430,7 @@ func (node *BorderNode) Colors() [4]gdk.RGBA {
 	var _rgbAs [4]gdk.RGBA // out
 
 	{
-		src := _cret
+		src := unsafe.Slice(_cret, 4)
 		for i := 0; i < 4; i++ {
 			_rgbAs[i] = *(*gdk.RGBA)(gextras.NewStructNative(unsafe.Pointer((&src[i]))))
 		}
