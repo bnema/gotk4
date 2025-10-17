@@ -1,0 +1,13 @@
+diff --git a/pkg/gsk/v4/gsk.go b/pkg/gsk/v4/gsk.go
+index ac5f848ec..7237f2c9d 100644
+--- a/pkg/gsk/v4/gsk.go
++++ b/pkg/gsk/v4/gsk.go
+@@ -1430,7 +1430,7 @@ func (node *BorderNode) Colors() [4]gdk.RGBA {
+ 	var _rgbAs [4]gdk.RGBA // out
+ 
+ 	{
+-		src := &_cret
++		src := _cret
+ 		for i := 0; i < 4; i++ {
+ 			_rgbAs[i] = *(*gdk.RGBA)(gextras.NewStructNative(unsafe.Pointer((&src[i]))))
+ 		}
